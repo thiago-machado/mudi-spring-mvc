@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<!-- 
+	Importando o framento "head" que está no arquivo base.
+	Toda vez que queremos importar um framento, nós usamos a sintaxe:
+	th:replace="~{arquivo :: fragmento}"
+ -->
+<head th:replace="~{base :: head}"></head>
+<body>
+	
+	<div th:replace="~{base :: logo}"></div>
+	<!-- todo conteúdo fica dentro de um container -->
+	<div class="container">
+	
+		<!-- Podemos enviar valores por parâmetro para um fragmento. Basta usar parênteses. -->
+		<div th:replace="~{base :: titulo('Novo Pedido')}"></div>
+		<div class="card">
+
+			<!-- 
+				Associando o formulário a um objeto do tipo requisicaoNovoPedidoDto.
+			-->
+			<form th:object="${requisicaoNovoPedidoDto}" action="/pedido/novo" class="card-body" method="POST">
+				<div>
+					<label for="nomeProduto">Produto</label>
+
+					<!--
+						Associando o field a um atributo do objeto requisicaoNovoPedidoDto.
+						Quando coocados *, estamos nos referenciando ao object definido anteriormente em form.
+						Quando usamos o th:field, ele criará "value", "id" e o "name".
+						Onde name e id conterão o nome do atribtuo. value possuirá o valor do atributo.
+						
+						th:errorclass incluirá a classe do CSS "is-invalid" caso algum erro ocorra no campo
+					-->
+					<input th:field="*{nomeProduto}" th:errorclass="is-invalid" class="form-control"
+						placeholder="nome do produto" />
+					<small>Informa qual o nome do produto.</small>
+
+					<!-- Exibirá todos os erros capturados pela validação do SPring -->
+					<div class="invalid-feedback" th:errors="*{nomeProduto}">Erro</div>
+				</div>
+				<div>
+					<label for="urlProduto">Url</label>
+					<input th:field="*{urlProduto}" th:errorclass="is-invalid" class="form-control"
+						placeholder="url do produto" />
+					<small>Procure em um site o produto que você deseja e cole a url da página aqui.</small>
+					<div class="invalid-feedback" th:errors="*{urlProduto}"></div>
+				</div>
+				<div>
+					<label for="urlImagem">Imagem</label>
+					<input th:field="*{urlImagem}" th:errorclass="is-invalid" class="form-control"
+						placeholder="url da imagem" />
+					<small>Copie a url de uma boa imagem do produto e cole aqui para ajudar a conseguir
+						compradores.</small>
+					<div class="invalid-feedback" th:errors="*{urlImagem}"></div>
+				</div>
+				<div>
+					<label for="descricao">Descrição</label>
+					<textarea th:field="*{descricao}" class="form-control"
+						placeholder="Adicione detalhes importantes para ajudar o comprador."></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>
