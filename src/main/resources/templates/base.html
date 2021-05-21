@@ -27,9 +27,13 @@
 	</style>
 </head>
 
-<div th:fragment="logo" class="logo-container mb-3 p-3 d-flex justify-content-between">
+<div th:fragment="logo" class="logo-container mb-4 p-4 d-flex justify-content-between">
 	<span class="logo">mudi</span>
-	<span class="mt-3">login</span>
+	<a class="text-light" href="/login" sec:authorize="!isAuthenticated()">login</a>
+	
+	<!-- o Spring Security vai receber a requisição em /logout (ver WebSecurityConfig) -->
+	<a class="text-light" onclick="document.querySelector('#form-logout').submit()" sec:authorize="isAuthenticated()" href="#">logout</a>
+	<form id="form-logout" th:action="@{/logout}" method="POST"></form>
 </div>
 
 <!-- Esse fragmento recebe um valor como parâmetro -->

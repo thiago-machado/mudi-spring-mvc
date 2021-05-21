@@ -1,5 +1,7 @@
 package com.alura.mvc.mudi.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,10 +20,11 @@ public class HomeController {
 	@Autowired
 	private PedidoRepository repo;
 	
+	// Principal é do Java Secutiry. O Spring vai injetar os dados do usuário logado em Principal 
 	@GetMapping // Toda requisição /home sem um sufixo, cairá nesse método (default)
-	public ModelAndView hello() {
+	public ModelAndView hello(Principal principal) {
 		ModelAndView mv = new ModelAndView("home"); // nome da página
-	    mv.addObject("pedidos", repo.findAll()); // valores que serão "jogados" para renderização na página
+	    mv.addObject("pedidos", repo.findAllByUser(principal.getName())); // valores que serão "jogados" para renderização na página
 		return mv;
 	}
 	

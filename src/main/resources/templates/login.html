@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="~{base :: head}"></head>
+
+<body>
+
+	<div th:replace="~{base :: logo}"></div>
+	<!-- todo conteúdo fica dentro de um container -->
+	<div class="container">
+		<div th:replace="~{base :: titulo('Login')}"></div>
+
+		<div class="card mb-3">
+			
+			<!-- o Spring Security vai receber a requisição em /login (ver WebSecurityConfig) -->
+			<form th:action="@{/login}" method="post">
+				<div>
+					<label for="username">Usuário</label>
+					<input name="username" class="form-control" />
+				</div>
+				<div>
+					<label for="password">Senha</label>
+					<input name="password" type="password" class="form-control" />
+				</div>
+				<button type="submit" class="btn btn-primary">Login</button>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

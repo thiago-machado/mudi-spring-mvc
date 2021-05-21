@@ -55,6 +55,17 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- DEPENDENCIAS INCLUIDAS NO SEGUNDO CURSO -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!-- https://www.thymeleaf.org/doc/articles/springsecurity.html -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
